@@ -1,12 +1,14 @@
 # Flight Tracking
 
 ## Steps for run
- - Clone the project
+ - Clone the project: git clone git@github.com:suca/flight-tracking.git
+ - cd to project
  - npm install
  - bower install
- - grunt build
  - grunt run 
 
 ## License
 
-MIT omarsucap100@gmail.com
+MIT
+
+# Ng-Seven Core Team
