@@ -6,40 +6,28 @@ module.exports = function(grunt) {
         libsdir: 'bower_components',
         watch: {
             scripts: {
-                files: ['**/*.js', '**/*.css'],
+                files: ['src/**/*.js'],
                 tasks: ['concat'],
                 options: {
                     livereload: true
                 }
-            },
-            livereload: {
-                options: {
-                  livereload: '<%= connect.options.livereload %>'
-                },
-                files: '<%= pkg.files%>'
             }
         },
         connect: {
-            useAvailablePort: true,
-          options: {
-            port: 9000,
-            // Change this to '0.0.0.0' to access the server from outside.
-            hostname: '127.0.0.1',
-            livereload: 35729
-          },
-          livereload: {
             options: {
-              open: true,
-              base: [
-                'app'
-              ]
+                port: 8000,
+                hostname: 'localhost',
+                livereload: true//,
+                //keepalive: true
+            },
+            livereload: {
+                options: {
+                    open: true,
+                    base: [
+                        './dist/'
+                    ]
+                }
             }
-          },
-          dist: {
-            options: {
-              base: 'app'
-            }
-          }
         },
         concat: {
             options: {
@@ -132,10 +120,18 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  
   //grunt.loadNpmTasks('grunt-shell');
   //grunt.registerTask('default', ['concat', 'uglify', 'copy', 'shell']);
   grunt.registerTask('default', ['concat', 'copy']);
-  
+  //grunt.registerTask('run', ['concat', 'watch', 'connect:livereload']);
+  grunt.registerTask('run', function() {
+    grunt.task.run([
+        'concat', 
+        'connect',
+        'watch'
+        ]);
+  });
 };

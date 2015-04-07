@@ -1,4 +1,6 @@
 
+console.log('1 2 3 4');
+
 var defaultStyle = {
   'Point': [new ol.style.Style({
     image: new ol.style.Circle({
