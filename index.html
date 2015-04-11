@@ -19,7 +19,7 @@
 <body ng-app="flightTrackingApp" ng-controller="mainController">
 
 	<div class="bs-flight bs-navbar-top-flight" data-flight-id="navbar-fixed-to-top">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-default navbar-fixed-top">
       
       <div class="container-fluid">
         <div class="navbar-header">
@@ -32,34 +32,28 @@
 
         <div class="navbar-collapse collapse" id="navbar-collapsed-flight" aria-expanded="false">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/#/map">Flights</a></li>
-            <li><a href="/#/aircraft">Aircraft</a></li>
-            <li><a href="/#/reports">Reports</a></li>
+            <li class="active">
+              <a id="flightOpt" href="/#/map">Flights</a>
+            </li>
+            <li>
+              <a id="aircraftOpt" href="/#/aircraft">Aircraft</a>
+            </li>
+            <li>
+              <a id="reportOpt" href="/#/reports">Reports</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
   </div>
-    
-  
-
   
   <div class="col-md-9">
     <div ng-view>
       <div class="flight-map-container">
-        {{ hello }}
-        <p>The number {{3 + 4}}.</p>
-      </div>    
+      </div>
     </div>
   </div>
-  <!-- <div>
-     <h2>OpenLayers</h2>
 
-    <div ng-controller="flightCtrl">
-        {{greeting}}
-        <div id='map'></div>
-    </div>
-  </div> -->
 
 
 	
