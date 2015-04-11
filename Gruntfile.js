@@ -6,8 +6,14 @@ module.exports = function(grunt) {
         libsdir: 'bower_components',
         watch: {
             scripts: {
-                files: ['src/**/*.js'],
-                tasks: ['concat'],
+                files: [
+                    'src/**/*.html',
+                    'styles/*.css',
+                    'index.html',
+                    'Gruntfile.js',
+                    'package.json'
+                ],
+                tasks: ['concat', 'copy'],
                 options: {
                     livereload: true
                 }
@@ -35,12 +41,12 @@ module.exports = function(grunt) {
             },
             distJS: {
                 //src: ['src/**/*.js'],
-                src: '<%= pkg.files%>',
-                dest: 'dist/js/<%= pkg.name %>.js'
+                src: '<%= pkg.files.js%>',
+                dest: 'dist/<%= pkg.name %>.js'
             },
             distCSS: {
-                src: ['css/*.css'],
-                dest: 'dist/css/<%= pkg.name %>.css'
+                src: '<%= pkg.files.css%>',
+                dest: 'dist/<%= pkg.name %>.css'
             }
         },
         uglify: {
@@ -56,7 +62,13 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    // includes files within path
+                    {
+                        expand: true, 
+                        cwd: 'src',
+                        src: '**/*.html',
+                        dest : 'dist/views',
+                        filter: 'isFile'
+                    },
                     {
                         expand: true, 
                         src: ['index.html'], 
@@ -69,6 +81,14 @@ module.exports = function(grunt) {
                     {
                         src: '<%=  libsdir %>/angular/angular.min.js.map',
                         dest : 'dist/libs/angular.min.js.map'
+                    },
+                    {
+                        src: '<%=  libsdir %>/angular-route/angular-route.min.js',
+                        dest : 'dist/libs/angular-route.js'
+                    },
+                    {
+                        src: '<%=  libsdir %>/angular-route/angular-route.min.js.map',
+                        dest : 'dist/libs/angular-route.min.js.map'
                     },
                     {
                         src: '<%=  libsdir %>/jquery-2.1.0.min/index.js',
@@ -104,7 +124,21 @@ module.exports = function(grunt) {
                     }
                 ]
             }
-        },
+        }/*,
+        shell: {
+            push: {
+                command: function() {
+                    grunt.log.writeln('Pushing ' + pkg.name + ' to bluemix');
+                    return 'cd dist; cf push '+ pkg.name + ' --no-manifest --no-start -c "NODE_ENV=production node server.js"' ;
+                }
+            },
+            start: {
+                command: function() {
+                    grunt.log.writeln('Start ' + pkg.name);
+                    return 'cf start ' + pkg.name;
+                }
+            }
+        }*/
         /*shell: {
             multiple: {
                 command: [
@@ -126,10 +160,15 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks('grunt-shell');
   //grunt.registerTask('default', ['concat', 'uglify', 'copy', 'shell']);
   grunt.registerTask('default', ['concat', 'copy']);
-  //grunt.registerTask('run', ['concat', 'watch', 'connect:livereload']);
-  grunt.registerTask('run', function() {
+  grunt.registerTask('bluemix', [
+    'build',
+    'shell:push',
+    'shell:start'
+  ]);
+  grunt.registerTask('build', function() {
     grunt.task.run([
         'concat', 
+        'copy',
         'connect',
         'watch'
         ]);

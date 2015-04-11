@@ -1,0 +1,28 @@
+.flight-map-container {
+	
+}
+
+
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700);
+
+body {
+  padding-top: 60px;
+}
+.map {
+  height: 400px;
+  width: 100%;
+}
+.ol-attribution {
+  max-width: calc(100% - 3em);
+}
+div.ol-attribution.ol-unselectable.ol-control.ol-uncollapsible {
+	display: none;
+}
+.ol-control button, .ol-attribution, .ol-scale-line-inner {
+  font-family: 'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif;
+}
+#tags {
+  display: none;
+}
+
+

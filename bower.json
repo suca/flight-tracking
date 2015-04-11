@@ -23,6 +23,7 @@
     "jquery-2.1.0.min": "http://code.jquery.com/jquery-2.1.0.min.js",
     "ol3js": "http://openlayers.org/en/v3.4.0/build/ol.js",
     "ol3css": "http://openlayers.org/en/v3.4.0/css/ol.css",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "angular-route": "~1.3.15"
   }
 }
