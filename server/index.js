@@ -3,6 +3,7 @@
  */
 var express = require('express'),
   api = require('./api');
+  
 
 var app = module.exports = express();
 
@@ -26,9 +27,8 @@ app.get('/api/flight/:id', api.getFlight);
 app.post('/api/flight', api.postFlight);
 app.put('/api/flight/:id', api.putFlight);
 app.delete('/api/flight/:id', api.deleteFlight);
-
-
-
+app.get('/api/airports', api.getAirports);
+app.get('/api/airport/:id', api.getAirport);
 
 var server = app.listen(3000, function () {
 
@@ -39,3 +39,4 @@ var server = app.listen(3000, function () {
 
 });
 
+exports.express

@@ -5,8 +5,11 @@ var app = angular.module('flightTrackingApp', [
 config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
         /*$locationProvider.html5Mode(true);*/
-
         $routeProvider.
+        when('/', {
+            templateUrl: 'views/main/main.html',
+            controller: 'mainController'
+        }).
         when('/map', {
             templateUrl: 'views/map/map.html',
             controller: 'mapController'
@@ -22,7 +25,5 @@ config(['$routeProvider', '$locationProvider',
         otherwise({
             redirectTo: '/'
         });
-
-        
     }
-])
+])  

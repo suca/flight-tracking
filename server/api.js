@@ -1,7 +1,46 @@
+var mysql = require('mysql'),
+	connection;
+
+var connectDB = function () {
+	connection = mysql.createConnection({
+	  host     : 'localhost',
+	  user     : 'root',
+	  password : 'sucaomar',
+	  database : 'flights'
+	});
+	connection.connect();	
+};
+
 /*
  * Serve JSON to our AngularJS client
  */
-
+exports.getAirports = function (req, res) {
+	connectDB();
+	connection.query('SELECT * from airports', function(err, rows, fields) {
+		connection.end();
+		if (!err) {
+			res.send(rows);
+		 	
+		} else {
+		   console.log('Error while performing Query.');
+		  
+		}
+	});
+};
+exports.getAirport = function (req, res) {
+	connectDB();
+	var identifier = req.params.id;
+	//console.log("ID: " + identifier);
+	connection.query('SELECT * from airports where ID='+identifier, function(err, rows, fields) {
+		connection.end();
+		if (!err) {
+			res.send(rows);
+		 	
+		} else {
+		   console.log('Error while performing Query.');  
+		}
+	});
+};
 exports.getFlights = function (req, res) {
 	res.send("GET", "Flights");
 };
