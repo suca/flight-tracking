@@ -121,6 +121,24 @@ module.exports = function(grunt) {
                         src: ['views/*'], 
                         dest: 'dist/', 
                         filter: 'isFile'
+                    },
+                    {
+                        expand: true, 
+                        src: 'flight3d/*', 
+                        dest: 'dist/', 
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: true, 
+                        cwd: 'flight3d/models/', 
+                        src: ['**'],
+                        dest: 'dist/models'
+                    },
+                    {
+                        expand: true, 
+                        cwd: 'flight3d/resources/', 
+                        src: ['**'],
+                        dest: 'dist/resources'
                     }
                 ]
             }
