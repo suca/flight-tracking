@@ -28,7 +28,7 @@ app.controller('mainController', function($rootScope, $scope, $location, $http) 
       		
 
 			var featuresMap = [];
-      		for (var i=0; i<1; i++) {
+      		/*for (var i=0; i<1; i++) {
       			featuresMap.push({
 	            	'type': 'Feature',
 	            	'geometry': {
@@ -36,24 +36,28 @@ app.controller('mainController', function($rootScope, $scope, $location, $http) 
 	              		'coordinates': [response[i].LATITUDE, response[i].LONGITUDE]
 	            	}
 	          	});
-      		}
+      		}*/
 
           var myLatlng = new google.maps.LatLng(response[0].LATITUDE,response[0].LONGITUDE);
 
           function initialize () {
             var mapProp = {
-              center:myLatlng,
-              zoom: 17,
-              mapTypeId:google.maps.MapTypeId.HYBRID
+              center: myLatlng,
+              zoom: 5,
+              mapTypeId:google.maps.MapTypeId.ROADMAP
             };
 
             var map = new google.maps.Map($("#googleMap")[0],mapProp);
 
-             var marker = new google.maps.Marker({
-                position: myLatlng,
+            for (var i=0; i<response.length; i++) {
+              var latlng = new google.maps.LatLng(response[i].LATITUDE,response[i].LONGITUDE);
+              var marker = new google.maps.Marker({
+                position: latlng,
                 map: map,
-                title: 'Google Maps'
-            });
+                icon: (i%2 == 0) ? '' :'img/airplane-32.png'
+              });
+            }
+             
           }
 
           setTimeout(function() {
