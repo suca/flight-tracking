@@ -68,7 +68,7 @@ exports.getFlight = function (req, res) {
 	var identifier = req.params.id;
 	var options = {
 	    host: 'planefinder.net',
-	    path: '/endpoints/planeData.php?callback=jQuery110208798748317640275_1428803056304&adshex=0D042B&flightno=' + identifier + '&ts=' + new Date().getTime() + '&isFAA=0&_=1428803056331'
+	    path: '/endpoints/planeData.php?callback=jQuery1102015090466244146228_1428817924848&adshex=E034D8&flightno=' + identifier + '&ts=' + new Date().getTime() + '&isFAA=0&_=1428817924874'	    
 	}
 	getData(options, req, res);
 };

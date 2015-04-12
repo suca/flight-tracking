@@ -14,7 +14,7 @@ app.controller('airplaneController', function ($scope, $http) {
     viewer.setParameter('RenderMode','texturesmooth');
     viewer.init();
     viewer.update();
-$scope.flightId="WN2734";
+$scope.flightId="AR1132";
   $http({
     method: 'GET',
     url:    'http://localhost:3000/api/flight/'+$scope.flightId,
@@ -25,6 +25,7 @@ $scope.flightId="WN2734";
     }
   }).
     success(function(response){
+      console.log(response);
       var indexRoute= response.indexOf("({");
       var jsonValid = response.substring(indexRoute+1,response.length-1);
       $scope.flightData= JSON.parse(jsonValid);
