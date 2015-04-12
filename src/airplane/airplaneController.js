@@ -14,4 +14,28 @@ app.controller('airplaneController', function ($scope, $http) {
     viewer.setParameter('RenderMode','texturesmooth');
     viewer.init();
     viewer.update();
+$scope.flightId="WN2734";
+  $http({
+    method: 'GET',
+    url:    'http://localhost:3000/api/flight/'+$scope.flightId,
+    params: '',
+    data:   {},
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).
+    success(function(response){
+      var indexRoute= response.indexOf("({");
+      var jsonValid = response.substring(indexRoute+1,response.length-1);
+      $scope.flightData= JSON.parse(jsonValid);
+      console.log("Success");
+      //console.log($scope.flightData);
+      $scope.photoPlaine={photo:''};
+      $scope.photoPlaine.photo=$scope.flightData.photos != null ?'http:'+ $scope.flightData.photos[0].fullPath: null;
+      console.log($scope.photoPlaine);
+    })
+    .error(function(){
+      console.log("Failure");
+    });
+
 });

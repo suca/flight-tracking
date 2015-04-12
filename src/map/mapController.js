@@ -274,7 +274,7 @@ app.controller('mapController', function ($scope, $http) {
 //
 //	$http({
 //        method: 'GET',
-//        url:    'http://localhost:3000/api/flight/1',
+//        url:    'http://localhost:3335/api/flight/1',
 //        params: '',
 //        data:   {},
 //        headers: {
