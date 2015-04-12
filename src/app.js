@@ -18,9 +18,9 @@ config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/aircraft/aircraft.html',
             controller: 'aircraftController'
         }).
-        when('/reports', {
-            templateUrl: 'views/reports/report.html',
-            controller: 'reportController'
+        when('/airplane', {
+            templateUrl: 'views/airplane/airplane.html',
+            controller: 'airplaneController'
         }).
         otherwise({
             redirectTo: '/'

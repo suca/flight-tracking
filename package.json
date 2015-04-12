@@ -5,7 +5,7 @@
     "js": [
       "src/app.js",
       "src/main/main.js",
-      "src/reports/reportController.js",
+      "src/airplane/airplaneController.js",
       "src/map/mapController.js",
       "src/aircraft/aircraftController.js"
     ],

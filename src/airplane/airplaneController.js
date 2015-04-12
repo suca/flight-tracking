@@ -1,5 +1,5 @@
 //Reports
-app.controller('reportController', function ($scope, $http) {
+app.controller('airplaneController', function ($scope, $http) {
 
 	var viewer = new JSC3D.Viewer(document.getElementById('cv'));
     var randImg = Math.floor((Math.random() * 10) + 1);
