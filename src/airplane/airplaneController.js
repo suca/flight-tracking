@@ -1,7 +1,7 @@
 //Reports
 app.controller('airplaneController', function ($scope, $http) {
 
-	var viewer = new JSC3D.Viewer(document.getElementById('cv'));
+  var viewer = new JSC3D.Viewer(document.getElementById('cv'));
     var randImg = Math.floor((Math.random() * 10) + 1);
     viewer.setParameter('SceneUrl',         'models/Boeing737/Boeing737.obj');
     viewer.setParameter('InitRotationX', 50);
@@ -14,29 +14,87 @@ app.controller('airplaneController', function ($scope, $http) {
     viewer.setParameter('RenderMode','texturesmooth');
     viewer.init();
     viewer.update();
-$scope.flightId="AR1132";
-  $http({
-    method: 'GET',
-    url:    'http://localhost:3000/api/flight/'+$scope.flightId,
-    params: '',
-    data:   {},
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).
+    
+      $http({
+        method: 'GET',
+        url:    'http://localhost:3000/api/flights',
+        params: '',
+        data:   {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).
     success(function(response){
-      console.log(response);
+      
+
       var indexRoute= response.indexOf("({");
       var jsonValid = response.substring(indexRoute+1,response.length-1);
-      $scope.flightData= JSON.parse(jsonValid);
-      console.log("Success");
-      //console.log($scope.flightData);
-      $scope.photoPlaine={photo:''};
-      $scope.photoPlaine.photo=$scope.flightData.photos != null ?'http:'+ $scope.flightData.photos[0].fullPath: null;
-      console.log($scope.photoPlaine);
+      $scope.flightData = JSON.parse(jsonValid);
+      console.log($scope.flightData);
+      $scope.dataFlight = [];
+        
+      
+      if ($scope.flightData) {
+        var auxFlights = $scope.flightData.planes[1];
+        $scope.flights = [];
+        $.each(auxFlights, function(index, value) {
+          $scope.flights.push({
+            id: index,
+            data: value
+          });
+        });
+      } 
+      
     })
     .error(function(){
       console.log("Failure");
+      $scope.flights = [];
     });
+
+    $scope.onSelectFlight = function (item) {
+      if (!item) {
+        return false;
+      }
+
+      $scope.flightId = item.id;
+      $http({
+        method: 'GET',
+        url:    'http://localhost:3000/api/flight/'+$scope.flightId,
+        params: '',
+        data:   {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).
+      success(function(response){
+
+        var indexRoute= response.indexOf("({");
+        var jsonValid = response.substring(indexRoute+1,response.length-1);
+        $scope.flightData = JSON.parse(jsonValid);
+        console.log($scope.flightData);
+        $scope.dataFlight = [];
+        if ($scope.flightData) {
+          if ($scope.flightData.aircraft) {
+            $.each($scope.flightData.aircraft, function(index, value){
+              $scope.dataFlight.push({
+                label: index,
+                value: value
+              });
+            })
+          } else {
+            alert("There is no data about the airplane...");
+          }
+          
+          if ($scope.flightData.photos.length > 0) {
+            $scope.photoPlaine={photo:''};
+            $scope.photoPlaine.photo=$scope.flightData.photos != null ?'http:'+ $scope.flightData.photos[0].fullPath: null;
+          } 
+        }
+      
+      })
+      .error(function(){
+        console.log("Failure");
+      });
+    };
 
 });

@@ -1,5 +1,4 @@
 .flight-map-container {
-	
 }
 
 
@@ -7,7 +6,13 @@
 
 body {
 	padding-top: 60px;
-	background: rgb(34, 34, 34);
+	background: white;
+}
+.container-view-details {
+	text-align: center;
+}
+.container-view-details label{
+	color: white;
 }
 .map {
   height: 400px;
@@ -26,5 +31,12 @@ div.ol-attribution.ol-unselectable.ol-control.ol-uncollapsible {
   display: none;
 }
 
+.align-center {
+	text-align: center;
+}
 
-
+.sidebar-nav ul{
+	list-style: none;
+	color: white;
+	padding: 15px;
+}

@@ -139,7 +139,13 @@ module.exports = function(grunt) {
                         cwd: 'flight3d/resources/', 
                         src: ['**'],
                         dest: 'dist/resources'
-                    }
+                    },
+                    {
+                        expand: true, 
+                        src: 'img/*', 
+                        dest: 'dist/', 
+                        filter: 'isFile'
+                    },
                 ]
             }
         }/*,

@@ -1,45 +1,47 @@
-<div id="wrapper">
+<script type="text/javascript" src="flight3d/jsc3d.js"></script>
+<script type="text/javascript" src="flight3d/jsc3d.webgl.js"></script>
 
+<script type="text/javascript" src="flight3d/jsc3d.touch.js"></script>
+
+<div class="col-lg-2 col-md-2 col-sm-2 hidden-xs" >
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <!--<img class="col-lg-12"src="http://planefinder.net/images/640thumbs/5983902:Photo:407940.jpg">-->
-            <img class="col-lg-12" src="{{photoPlaine.photo}}">
-
+    <div>
+        <div class="sidebar-nav">
             <h6></h6>
-        </ul>
+            
+            <form class="form-inline">
+              <input ng-model="query" type="text" placeholder="Filter by" autofocus>
+            </form>
+            <ul>
+                <li ng-repeat="flight in flights | filter:query | orderBy: 'name'" ng-click="onSelectFlight(flight);">
+                    <span style="color:red">{{flight.data[10]}}</span> - <span style="color:green;">{{flight.data[11]}}</span>
+                </li>
+            </ul>
+        </div>
     </div>
-    <!-- /#sidebar-wrapper -->
+</div>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <canvas id="cv" width="640" height="480"></canvas>
-                    <script type="text/javascript" src="flight3d/jsc3d.js"></script>
-                    <script type="text/javascript" src="flight3d/jsc3d.webgl.js"></script>
-                    <script type="text/javascript" src="flight3d/jsc3d.touch.js"></script>
-                    <a ng-hide="true" href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                </div>
+<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 align-center">
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <canvas id="cv" width="300" height="300"></canvas>
             </div>
         </div>
     </div>
-    <!-- /#page-content-wrapper -->
+
+    <form class="form-horizontal container-view-details col-lg-6 col-md-6 col-sm-6 col-xs-6" role="form">
+        <h5>Original Image</h5>
+        <img class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="max-width: 100%;max-height: 100%;top:15px;" src="{{photoPlaine.photo}}">
+        <h5>Information</h5>
+        <div class="form-group" ng-repeat="item in dataFlight">
+            <label for="ejemplo_email_3" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">
+                {{item.label}}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+              <input type="text" ng-value="item.value" class="form-control">
+            </div>
+        </div>
+    </form>
 
 </div>
-<!-- /#wrapper -->
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>

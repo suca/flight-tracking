@@ -1,4 +1,4 @@
-app.controller('mainController', function($rootScope, $scope, $location) {
+app.controller('mainController', function($rootScope, $scope, $location, $http) {
 
     var optionClicked = function (event) {
     	$(".nav.navbar-nav").find("li").removeClass("active");
@@ -12,68 +12,61 @@ app.controller('mainController', function($rootScope, $scope, $location) {
     	$(".nav.navbar-nav").find("li").removeClass("active");
     	$(".navbar-toggle").trigger('click');
     });
-    
-	
-	var image = new ol.style.Circle({
-	  radius: 5,
-	  fill: null,
-	  stroke: new ol.style.Stroke({color: 'black', width: 1})
-	});
+   
 
-	var styles = {
-	  'Point': [new ol.style.Style({
-	    image: image
-	  })]
-	};
+	$http({
+        method: 'GET',
+        url:    'http://localhost:3000/api/airports',
+        params: '',
+        data:   {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).
+      success(function(response){
+      	if (response) {
+      		
 
-	var styleFunction = function(feature, resolution) {
-	  return styles[feature.getGeometry().getType()];
-	};
+			var featuresMap = [];
+      		for (var i=0; i<1; i++) {
+      			featuresMap.push({
+	            	'type': 'Feature',
+	            	'geometry': {
+	             		'type': 'Point',
+	              		'coordinates': [response[i].LATITUDE, response[i].LONGITUDE]
+	            	}
+	          	});
+      		}
 
-	var vectorSource = new ol.source.GeoJSON(
-    /** @type {olx.source.GeoJSONOptions} */ ({
-      object: {
-        'type': 'FeatureCollection',
-        'crs': {
-          'type': 'name',
-          'properties': {
-            'name': 'EPSG:3857'
+          var myLatlng = new google.maps.LatLng(response[0].LATITUDE,response[0].LONGITUDE);
+
+          function initialize () {
+            var mapProp = {
+              center:myLatlng,
+              zoom: 17,
+              mapTypeId:google.maps.MapTypeId.HYBRID
+            };
+
+            var map = new google.maps.Map($("#googleMap")[0],mapProp);
+
+             var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Google Maps'
+            });
           }
-        },
-        'features': [
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [0, 0]
-            }
-          }
-        ]
-      }
-    }));
 
-	var vectorLayer = new ol.layer.Vector({
-	  source: vectorSource,
-	  style: styleFunction
-	});
+          setTimeout(function() {
+            initialize();
 
-	var map = new ol.Map({
-	  layers: [
-	    new ol.layer.Tile({
-	      source: new ol.source.OSM()
-	    }),
-	    vectorLayer
-	  ],
-	  target: 'map',
-	  controls: ol.control.defaults({
-	    attributionOptions: ({
-	      collapsible: false
-	    })
-	  }),
-	  view: new ol.View({
-	    center: [0, 0],
-	    zoom: 2
-	  })
-	});
-
+            setTimeout(function(){
+              $("a[title='Click to see this area on Google Maps']").hide()
+            }, 10000);
+          }, 2000);
+          
+      	}
+      })
+      .error(function(){
+        console.log("Failure");
+      });
 });

@@ -5,10 +5,11 @@
  - cd to project
  - npm install
  - bower install
- - grunt run 
+ - grunt build 
 
 ## Steps for run the Server
  - cd to server
+ - npm install
  - node index.js
 
 #About the Endpoints
