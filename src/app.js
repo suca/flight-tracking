@@ -22,6 +22,10 @@ config(['$routeProvider', '$locationProvider',
             templateUrl: 'views/airplane/airplane.html',
             controller: 'airplaneController'
         }).
+        when('/test', {
+            templateUrl: 'views/aircraft/test.html',
+            controller: 'aircraftController'
+        }).
         otherwise({
             redirectTo: '/'
         });
