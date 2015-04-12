@@ -136,6 +136,7 @@ app.controller('mapController', function ($scope, $http) {
         var R = 7e6;
         var r = 2e6;
         var p = 2e6;
+        //
         map.on('postcompose', function(event) {
             var vectorContext = event.vectorContext;
             var frameState = event.frameState;
