@@ -10,11 +10,12 @@
             <h6></h6>
             
             <form class="form-inline">
-              <input ng-model="query" type="text" placeholder="Filter by" autofocus>
+              <input style="padding-left: 5px;" ng-model="query" type="text" placeholder="Filter by" autofocus>
             </form>
             <ul>
                 <li ng-repeat="flight in flights | filter:query | orderBy: 'name'" ng-click="onSelectFlight(flight);">
-                    <span style="color:red">{{flight.data[10]}}</span> - <span style="color:green;">{{flight.data[11]}}</span>
+                    <span style="color:red">{{flight.data[10]}}</span> - <span style="color:green;">{{flight.data[11]}}</span> 
+                    
                 </li>
             </ul>
         </div>

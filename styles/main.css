@@ -40,3 +40,9 @@ div.ol-attribution.ol-unselectable.ol-control.ol-uncollapsible {
 	color: white;
 	padding: 15px;
 }
+.sidebar-nav li {
+	padding-left: 5px;
+}
+.sidebar-nav li:hover {
+	background: lightsteelblue;
+}

@@ -71,7 +71,7 @@ exports.getFlight = function (req, res) {
 	var options = {
 	    host: 'planefinder.net',
 	    //path: '/endpoints/planeData.php?callback=jQuery1102015090466244146228_1428817924848&adshex=E48FCE&flightno=JJ8102&ts=1428820907&isFAA=0&_=1428817924970'
-	    path: '/endpoints/planeData.php?callback=jQuery1102015090466244146228_1428817924848&adshex=1429540251596&flightno=' + identifier + '&ts=' + new Date().getTime() + '&isFAA=1&_=1428817925134'	    
+	    path: '/endpoints/planeData.php?callback=jQuery110203558175293728709_1428868624563&adshex=1427680848947&flightno=' + identifier + '&ts=' + new Date().getTime() + '&isFAA=1&_=1428868624565'	    
 	}
 	getData(options, req, res);
 };
